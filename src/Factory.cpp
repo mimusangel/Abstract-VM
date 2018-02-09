@@ -1,6 +1,4 @@
 #include "Factory.hpp"
-#include "Operand.hpp"
-#include <limits>
 /*
 **  PRIVATE
 */
@@ -15,27 +13,27 @@ Factory::Factory(void)
 
 IOperand const *Factory::createInt8(std::string const &value) const
 {
-    return (new Operand<char>(INT8, (char)std::atoi(value.c_str), 0, std::numeric_limits<char>::min(), std::numeric_limits<char>::max()));
+    return (new Operand<char>(INT8, (char)std::atoi(value.c_str()), 0, std::numeric_limits<char>::min(), std::numeric_limits<char>::max()));
 }
 
 IOperand const *Factory::createInt16(std::string const &value) const
 {
-    return (new Operand<int>(INT16, std::atoi(value.c_str), 1, std::numeric_limits<int>::min(), std::numeric_limits<int>::max()));
+    return (new Operand<int>(INT16, std::atoi(value.c_str()), 1, std::numeric_limits<int>::min(), std::numeric_limits<int>::max()));
 }
 
 IOperand const *Factory::createInt32(std::string const &value) const
 {
-    return (new Operand<long>(INT32, std::atol(value.c_str), 2, std::numeric_limits<long>::min(), std::numeric_limits<long>::max()));
+    return (new Operand<long>(INT32, std::atol(value.c_str()), 2, std::numeric_limits<long>::min(), std::numeric_limits<long>::max()));
 }
 
 IOperand const *Factory::createFloat(std::string const &value) const
 {
-    return (new Operand<float>(FLOAT, (float)std::atof(value.c_str), 3, std::numeric_limits<float>::min(), std::numeric_limits<float>::max()));
+    return (new Operand<float>(FLOAT, (float)std::atof(value.c_str()), 3, std::numeric_limits<float>::min(), std::numeric_limits<float>::max()));
 }
 
 IOperand const *Factory::createDouble(std::string const &value) const
 {
-    return (new Operand<double>(DOUBLE, std::atof(value.c_str), 4, std::numeric_limits<double>::min(), std::numeric_limits<double>::max()));
+    return (new Operand<double>(DOUBLE, std::atof(value.c_str()), 4, std::numeric_limits<double>::min(), std::numeric_limits<double>::max()));
 }
 
 /*

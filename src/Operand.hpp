@@ -1,9 +1,13 @@
 #ifndef OPERAND_HPP
 #define OPERAND_HPP
 
+#include <sstream>
+#include <limits>
 #include <string>
 #include "IOperand.hpp"
 #include "Factory.hpp"
+
+#include <iostream>
 
 template <typename T>
 class Operand : public IOperand {
@@ -41,12 +45,12 @@ public:
         }
     }
 
-    int             Operand::getPrecision(void) const
+    int             getPrecision(void) const
     {
         return (_precision);
     }
 
-    eOperandType    Operand::getType(void) const
+    eOperandType    getType(void) const
     {
         return (_type);
     }
@@ -66,102 +70,117 @@ public:
         return (_max);
     }
 
+    
+    template <typename U>
+    IOperand const *createByValue(eOperandType type, int precision, long double &value) const
+    {
+        return (new Operand<U>(type, value, precision, std::numeric_limits<U>::min(), std::numeric_limits<U>::max()));
+    }
+
     IOperand const  *operator+(IOperand const &rhs) const
     {
-        IOperand        *result;
-        eOperandType    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
+        IOperand const        *result;
+        eOperandType const    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
+        long double value = (long double)(this->getValue() + std::atof(rhs.toString().c_str()));
 
         if (nType == INT8)
-            result = Factory::GetInstance().createByValue<char>(nType, 0, this->getValue() + rhs->getValue());
+            result = createByValue<char>(nType, 0, value);
         else if (nType == INT16)
-            result = Factory::GetInstance().createByValue<int>(nType, 1, this->getValue() + rhs->getValue());
+            result = createByValue<int>(nType, 1, value);
         else if (nType == INT32)
-            result = Factory::GetInstance().createByValue<long>(nType, 2, this->getValue() + rhs->getValue());
+            result = createByValue<long>(nType, 2, value);
         else if (nType == FLOAT)
-            result = Factory::GetInstance().createByValue<float>(nType, 3, this->getValue() + rhs->getValue());
+            result = createByValue<float>(nType, 3, value);
         else if (nType == DOUBLE)
-            result = Factory::GetInstance().createByValue<double>(nType, 4, this->getValue() + rhs->getValue());
+            result = createByValue<double>(nType, 4, value);
         return (result);
     }
 
     IOperand const  *operator-(IOperand const &rhs) const
     {
-        IOperand        *result;
-        eOperandType    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
-        
+        IOperand const        *result;
+        eOperandType const    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
+        long double value = (long double)(this->getValue() - std::atof(rhs.toString().c_str()));
+
         if (nType == INT8)
-            result = Factory::GetInstance().createByValue<char>(nType, 0, this->getValue() - rhs->getValue());
+            result = createByValue<char>(nType, 0, value);
         else if (nType == INT16)
-            result = Factory::GetInstance().createByValue<int>(nType, 1, this->getValue() - rhs->getValue());
+            result = createByValue<int>(nType, 1, value);
         else if (nType == INT32)
-            result = Factory::GetInstance().createByValue<long>(nType, 2, this->getValue() - rhs->getValue());
+            result = createByValue<long>(nType, 2, value);
         else if (nType == FLOAT)
-            result = Factory::GetInstance().createByValue<float>(nType, 3, this->getValue() - rhs->getValue());
+            result = createByValue<float>(nType, 3, value);
         else if (nType == DOUBLE)
-            result = Factory::GetInstance().createByValue<double>(nType, 4, this->getValue() - rhs->getValue());
+            result = createByValue<double>(nType, 4, value);
         return (result);
     }
 
     IOperand const  *operator*(IOperand const &rhs) const
     {
-        IOperand        *result;
-        eOperandType    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
-        
+        IOperand const        *result;
+        eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
+        long double value = (long double)(this->getValue() * std::atof(rhs.toString().c_str()));
+
         if (nType == INT8)
-            result = Factory::GetInstance().createByValue<char>(nType, 0, this->getValue() * rhs->getValue());
+            result = createByValue<char>(nType, 0, value);
         else if (nType == INT16)
-            result = Factory::GetInstance().createByValue<int>(nType, 1, this->getValue() * rhs->getValue());
+            result = createByValue<int>(nType, 1, value);
         else if (nType == INT32)
-            result = Factory::GetInstance().createByValue<long>(nType, 2, this->getValue() * rhs->getValue());
+            result = createByValue<long>(nType, 2, value);
         else if (nType == FLOAT)
-            result = Factory::GetInstance().createByValue<float>(nType, 3, this->getValue() * rhs->getValue());
+            result = createByValue<float>(nType, 3, value);
         else if (nType == DOUBLE)
-            result = Factory::GetInstance().createByValue<double>(nType, 4, this->getValue() * rhs->getValue());
+            result = createByValue<double>(nType, 4, value);
         return (result);
     }
 
     IOperand const  *operator/(IOperand const &rhs) const
     {
-        IOperand        *result;
-        eOperandType    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
+        IOperand const        *result;
+        eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         
-        if (rhs->getValue() == 0)
+        if (std::atof(rhs.toString().c_str()) == 0)
         {
             // EXEPTION ! DIVISION PAR 0
         }
+        long double value = (long double)(this->getValue() / std::atof(rhs.toString().c_str()));
         if (nType == INT8)
-            result = Factory::GetInstance().createByValue<char>(nType, 0, this->getValue() / rhs->getValue());
+            result = createByValue<char>(nType, 0, value);
         else if (nType == INT16)
-            result = Factory::GetInstance().createByValue<int>(nType, 1, this->getValue() / rhs->getValue());
+            result = createByValue<int>(nType, 1, value);
         else if (nType == INT32)
-            result = Factory::GetInstance().createByValue<long>(nType, 2, this->getValue() / rhs->getValue());
+            result = createByValue<long>(nType, 2, value);
         else if (nType == FLOAT)
-            result = Factory::GetInstance().createByValue<float>(nType, 3, this->getValue() / rhs->getValue());
+            result = createByValue<float>(nType, 3, value);
         else if (nType == DOUBLE)
-            result = Factory::GetInstance().createByValue<double>(nType, 4, this->getValue() / rhs->getValue());
+            result = createByValue<double>(nType, 4, value);
         return (result);
     }
 
     IOperand const  *operator%(IOperand const &rhs) const
     {
-        IOperand        *result;
-        eOperandType    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
+        IOperand const        *result;
+        eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         
-        if (rhs->getValue() == 0)
+        if (std::atof(rhs.toString().c_str()) == 0)
         {
             // EXEPTION ! DIVISION PAR 0
         }
-        if (this->getType() == FLOAT || this->getType() == DOUBLE
-            || rhs.getType() == FLOAT || rhs.getType() == DOUBLE)
+        if (this->getType() == FLOAT || rhs.getType() == FLOAT)
         {
-            // EXEPTION MODULO Impossible sur nombre flotant
+            // EXEPTION MODULO Impossible sur nombre flotant type float
         }
+        if (this->getType() == DOUBLE || rhs.getType() == DOUBLE)
+        {
+            // EXEPTION MODULO Impossible sur nombre flotant type double
+        }
+        long double value = (long double)((long int)this->getValue() % std::atol(rhs.toString().c_str()));
         if (nType == INT8)
-            result = Factory::GetInstance().createByValue<char>(nType, 0, this->getValue() % rhs->getValue());
+            result = createByValue<char>(nType, 0, value);
         else if (nType == INT16)
-            result = Factory::GetInstance().createByValue<int>(nType, 1, this->getValue() % rhs->getValue());
+            result = createByValue<int>(nType, 1, value);
         else if (nType == INT32)
-            result = Factory::GetInstance().createByValue<long>(nType, 2, this->getValue() % rhs->getValue());
+            result = createByValue<long>(nType, 2, value);
         return (result);
     }
 

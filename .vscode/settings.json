@@ -32,6 +32,10 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "deque": "cpp",
+        "sstream": "cpp",
+        "stack": "cpp",
+        "xmemory": "cpp"
     }
 }
