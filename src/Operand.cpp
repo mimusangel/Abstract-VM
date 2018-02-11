@@ -1,6 +1,0 @@
-#include "Operand.hpp"
-
-/*
-**  PUBLIC
-*/
-
