@@ -1,12 +1,12 @@
 #ifndef MANAGER_HPP
 #define MANAGER_HPP
 
-#include <stack>
+#include "VMList.hpp"
 #include "IOperand.hpp"
 
 class Manager {
 private:
-	std::stack<IOperand const *> _stack;
+	VMList<IOperand const *> _stack;
 
 public:
 	Manager(void) {}

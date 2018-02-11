@@ -24,11 +24,11 @@ void        Manager::pop(void)
 
 void        Manager::dump(void)
 {
-    IOperand const *op;
-    while (_stack.size())
+    VMList<IOperand const *>::iter        iter = _stack.end();
+    while (iter != _stack.begin())
     {
-        print();
-        pop();
+        std::cout << (*iter)->toString() << std::endl;
+        iter--;
     }
 }
 

@@ -36,6 +36,8 @@
         "deque": "cpp",
         "sstream": "cpp",
         "stack": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp"
     }
 }
