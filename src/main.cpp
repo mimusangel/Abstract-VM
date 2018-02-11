@@ -26,14 +26,30 @@ int main(int ac, char **av)
     try
     {
         Manager manager;
-        manager.push(Factory::GetInstance().createOperand(INT32, "42"));
-        manager.push(Factory::GetInstance().createOperand(INT32, "33"));
-        manager.add();
-        manager.push(Factory::GetInstance().createOperand(FLOAT, "44.55"));
-        manager.mul();
-        manager.push(Factory::GetInstance().createOperand(DOUBLE, "42.42"));
-        manager.push(Factory::GetInstance().createOperand(INT32, "42"));
-        manager.dump();
+        manager.push(Factory::GetInstance().createOperand(INT8, "33"));
+        manager.push(Factory::GetInstance().createOperand(INT8, "112"));
+        manager.push(Factory::GetInstance().createOperand(INT8, "111"));
+        manager.push(Factory::GetInstance().createOperand(INT8, "108"));
+        manager.push(Factory::GetInstance().createOperand(INT8, "112"));
+        manager.print();
+        manager.pop();
+        manager.print();
+        manager.pop();
+        manager.print();
+        manager.pop();
+        manager.print();
+        manager.pop();
+        manager.print();
+        manager.pop();
+        std::cout << std::endl;
+        // manager.push(Factory::GetInstance().createOperand(INT32, "42"));
+        // manager.push(Factory::GetInstance().createOperand(INT32, "33"));
+        // manager.add();
+        // manager.push(Factory::GetInstance().createOperand(FLOAT, "44.55"));
+        // manager.mul();
+        // manager.push(Factory::GetInstance().createOperand(DOUBLE, "42.42"));
+        // manager.push(Factory::GetInstance().createOperand(INT32, "42"));
+        // manager.dump();
     }
     catch(std::exception const &e)
     {

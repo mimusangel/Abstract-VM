@@ -27,9 +27,8 @@ void        Manager::dump(void)
     IOperand const *op;
     while (_stack.size())
     {
-        op = get();
-        std::cout << op->toString() << std::endl;
-        delete op;
+        print();
+        pop();
     }
 }
 
@@ -92,5 +91,12 @@ void		Manager::print(void)
 {
     if (_stack.size() <= 0)
         throw RuntimeException("Error: Stack is empty!");
-    std::cout << _stack.top().toString() << std::endl;
+    IOperand const   *op = _stack.top();
+    if (op->getType() == INT8)
+    {
+        char c = std::atoi(op->toString().c_str());
+        std::cout << c;
+    }
+    else
+        std::cout << op->toString();
 }

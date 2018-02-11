@@ -20,14 +20,15 @@ private:
 
     std::string	    strValue;
 
-
 public:
-    Operand(eOperandType type, long double value, int precision, T min, T max) :
-        _type(type), _value(0), _precision(precision), _min(min), _max(max)
+    Operand(eOperandType type, long double value, int precision) :
+        _type(type), _value(0), _precision(precision),
+        _min(std::numeric_limits<T>::min()),
+        _max(std::numeric_limits<T>::max())
     {
-        if (value >= min)
+        if (value >= _min)
         {
-            if (value <= max)
+            if (value <= _max)
             {
                 _value = (T)value;
                 std::ostringstream ss;
@@ -73,7 +74,7 @@ public:
     template <typename U>
     IOperand const *createByValue(eOperandType type, int precision, long double value) const
     {
-        return (new Operand<U>(type, value, precision, std::numeric_limits<U>::min(), std::numeric_limits<U>::max()));
+        return (new Operand<U>(type, value, precision));
     }
 
     IOperand const  *operator+(IOperand const &rhs) const
