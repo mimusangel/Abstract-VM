@@ -1,7 +1,7 @@
 #ifndef IOPERAND_HPP
 #define IOPERAND_HPP
 
-#include<string>
+#include <string>
 
 enum eOperandType {
     INT8 = 0,

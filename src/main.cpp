@@ -25,7 +25,7 @@ int main(int ac, char **av)
         }
         catch(std::exception const &e)
         {
-            std::cout << e.what() << std::endl;
+            std::cout << "ERROR: " << e.what() << std::endl;
         }
         delete parser;
     }

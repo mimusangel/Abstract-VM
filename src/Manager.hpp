@@ -10,6 +10,7 @@ private:
 
 public:
 	Manager(void) {}
+	~Manager(void);
 	void	    	push(IOperand const *op);
 	IOperand const	*get(void);
 	void            pop(void);
@@ -20,6 +21,7 @@ public:
 	void			div(void);
 	void			mod(void);
 	void			print(void);
+	bool	    	assert(IOperand const *op);
 };
 
 #endif

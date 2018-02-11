@@ -9,22 +9,23 @@
 #include "Exception.hpp"
 #include "Factory.hpp"
 
+
+
 template <typename T>
 class Operand : public IOperand {
 private:
     eOperandType    _type;
     T               _value;
     int             _precision;
-    T               _min;
-    T               _max;
+    long double     _min;
+    long double     _max;
 
     std::string	    strValue;
 
 public:
-    Operand(eOperandType type, long double value, int precision) :
+    Operand(eOperandType type, long double value, int precision, long double min, long double max) :
         _type(type), _value(0), _precision(precision),
-        _min(std::numeric_limits<T>::min()),
-        _max(std::numeric_limits<T>::max())
+        _min(min), _max(max)
     {
         if (value >= _min)
         {
@@ -39,10 +40,10 @@ public:
                 strValue.append(ss.str());
             }
             else
-                throw RuntimeException("Error: Overflow!");
+                throw RuntimeException("Overflow!");
         }
         else
-            throw RuntimeException("Error: Underflow!");
+            throw RuntimeException("Underflow!");
     }
 
     int             getPrecision(void) const
@@ -74,7 +75,7 @@ public:
     template <typename U>
     IOperand const *createByValue(eOperandType type, int precision, long double value) const
     {
-        return (new Operand<U>(type, value, precision));
+        return (new Operand<U>(type, value, precision, std::numeric_limits<U>::min(), std::numeric_limits<U>::max()));
     }
 
     IOperand const  *operator+(IOperand const &rhs) const
@@ -138,9 +139,9 @@ public:
     {
         IOperand const        *result = NULL;
         eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
-        
+
         if (std::atof(rhs.toString().c_str()) == 0)
-            throw LogicException("Error: Divide by Zero!");
+            throw LogicException("Divide by Zero!");
         long double value = (long double)((double)this->getValue() / std::atof(rhs.toString().c_str()));
         if (nType == INT8)
             result = createByValue<char>(nType, 0, value);
@@ -161,11 +162,11 @@ public:
         eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         
         if (std::atof(rhs.toString().c_str()) == 0)
-            throw LogicException("Error: Divide by Zero!");
+            throw LogicException("Divide by Zero!");
         if (this->getType() == FLOAT || rhs.getType() == FLOAT)
-            throw LogicException("Error: Modulo with float");
+            throw LogicException("Modulo with float");
         if (this->getType() == DOUBLE || rhs.getType() == DOUBLE)
-            throw LogicException("Error: Modulo with double");
+            throw LogicException("Modulo with double");
         long double value = (long double)((long int)this->getValue() % std::atol(rhs.toString().c_str()));
         if (nType == INT8)
             result = createByValue<char>(nType, 0, value);

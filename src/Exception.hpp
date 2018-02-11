@@ -10,6 +10,7 @@ public:
         runtime_error(what_arg)
     {}
 };
+
 class LogicException : public std::logic_error {
 public:
     LogicException(const std::string &what_arg) :

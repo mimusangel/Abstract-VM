@@ -1,0 +1,8 @@
+; -------------
+; sample.avm -
+; -------------
+push int8(120)
+push int8(120)
+add
+dump
+exit

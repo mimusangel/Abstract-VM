@@ -39,5 +39,6 @@
         "xmemory": "cpp",
         "__config": "cpp",
         "__nullptr": "cpp"
-    }
+    },
+    "editor.insertSpaces": false
 }
