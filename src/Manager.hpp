@@ -19,6 +19,7 @@ public:
 	void			mul(void);
 	void			div(void);
 	void			mod(void);
+	void			print(void);
 };
 
 #endif

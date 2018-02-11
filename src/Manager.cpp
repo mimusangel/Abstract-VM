@@ -87,3 +87,10 @@ void        Manager::mod(void)
     delete one;
     delete two;
 }
+
+void		Manager::print(void)
+{
+    if (_stack.size() <= 0)
+        throw RuntimeException("Error: Stack is empty!");
+    std::cout << _stack.top().toString() << std::endl;
+}
