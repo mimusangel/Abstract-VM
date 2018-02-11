@@ -14,11 +14,11 @@ public:
 	IOperand const	*get(void);
 	void            pop(void);
 	void            dump(void);
-	IOperand const	*add(void);
-	IOperand const	*sub(void);
-	IOperand const	*mul(void);
-	IOperand const	*div(void);
-	IOperand const	*mod(void);
+	void			add(void);
+	void			sub(void);
+	void			mul(void);
+	void			div(void);
+	void			mod(void);
 };
 
 #endif

@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Manager.hpp"
+#include "Exception.hpp"
+#include "Operand.hpp"
 
 void	    Manager::push(IOperand const *op)
 {
@@ -9,9 +11,7 @@ void	    Manager::push(IOperand const *op)
 IOperand const    *Manager::get(void)
 {   
     if (_stack.size() <= 0)
-    {
-        // EXEPTION STACK VIDE !
-    }
+        throw RuntimeException("Error: Stack is empty!");
     IOperand const    *top = _stack.top();
     _stack.pop();
     return (top);
@@ -33,72 +33,57 @@ void        Manager::dump(void)
     }
 }
 
-IOperand const   *Manager::add(void)
+void        Manager::add(void)
 {
     if (_stack.size() < 2)
-    {
-        // EXEPTION
-    }
+        throw RuntimeException("Error: Stack is empty or does not have enough!");
     IOperand const   *one = get();
     IOperand const   *two = get();
     push(*one + *two);
     delete one;
     delete two;
-    return (get());
 }
 
-IOperand const   *Manager::sub(void)
+void        Manager::sub(void)
 {
     if (_stack.size() < 2)
-    {
-        // EXEPTION
-    }
+        throw RuntimeException("Error: Stack is empty or does not have enough!");
     IOperand const   *one = get();
     IOperand const   *two = get();
     push(*one - *two);
     delete one;
     delete two;
-    return (get());
 }
 
-IOperand const   *Manager::mul(void)
+void        Manager::mul(void)
 {
     if (_stack.size() < 2)
-    {
-        // EXEPTION
-    }
+        throw RuntimeException("Error: Stack is empty or does not have enough!");
     IOperand const   *one = get();
     IOperand const   *two = get();
     push(*one * *two);
     delete one;
     delete two;
-    return (get());
 }
 
-IOperand const   *Manager::div(void)
+void        Manager::div(void)
 {
     if (_stack.size() < 2)
-    {
-        // EXEPTION
-    }
+        throw RuntimeException("Error: Stack is empty or does not have enough!");
     IOperand const   *one = get();
     IOperand const   *two = get();
     push(*one / *two);
     delete one;
     delete two;
-    return (get());
 }
 
-IOperand const   *Manager::mod(void)
+void        Manager::mod(void)
 {
     if (_stack.size() < 2)
-    {
-        // EXEPTION
-    }
+        throw RuntimeException("Error: Stack is empty or does not have enough!");
     IOperand const   *one = get();
     IOperand const   *two = get();
     push(*one % *two);
     delete one;
     delete two;
-    return (get());
 }
