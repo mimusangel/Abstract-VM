@@ -4,9 +4,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "(mac) build",
             "type": "shell",
-            "command": "g++ -o avm.exe src/*.cpp -std=c++11 -Wall -Werror -Wextra"
+            "command": "g++ -o avm.out src/*.cpp -std=c++11 -Wall -Werror -Wextra"
+        },
+        {
+            "label": "(mac) build and exec",
+            "type": "shell",
+            "command": "g++ -o avm.out src/*.cpp -std=c++11 -Wall -Werror -Wextra && ./avm.out"
         }
     ]
 }

@@ -79,7 +79,7 @@ public:
 
     IOperand const  *operator+(IOperand const &rhs) const
     {
-        IOperand const        *result;
+        IOperand const        *result = NULL;
         eOperandType const    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         long double value = (long double)(this->getValue() + std::atof(rhs.toString().c_str()));
 
@@ -98,7 +98,7 @@ public:
 
     IOperand const  *operator-(IOperand const &rhs) const
     {
-        IOperand const        *result;
+        IOperand const        *result = NULL;
         eOperandType const    nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         long double value = (long double)(this->getValue() - std::atof(rhs.toString().c_str()));
 
@@ -117,7 +117,7 @@ public:
 
     IOperand const  *operator*(IOperand const &rhs) const
     {
-        IOperand const        *result;
+        IOperand const        *result = NULL;
         eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         long double value = (long double)(this->getValue() * std::atof(rhs.toString().c_str()));
 
@@ -136,7 +136,7 @@ public:
 
     IOperand const  *operator/(IOperand const &rhs) const
     {
-        IOperand const        *result;
+        IOperand const        *result = NULL;
         eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         
         if (std::atof(rhs.toString().c_str()) == 0)
@@ -159,7 +159,7 @@ public:
 
     IOperand const  *operator%(IOperand const &rhs) const
     {
-        IOperand const        *result;
+        IOperand const        *result = NULL;
         eOperandType const   nType = this->getPrecision() > rhs.getPrecision() ? this->getType() : rhs.getType();
         
         if (std::atof(rhs.toString().c_str()) == 0)

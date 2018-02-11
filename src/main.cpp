@@ -20,8 +20,8 @@ int main(int ac, char **av)
     //     }
 
     // }
-
-    std::cout << "coucou" << std::endl;
+    (void)ac;
+    (void)av;
     Manager manager;
     manager.push(Factory::GetInstance().createOperand(INT8, "42"));
     manager.dump();
