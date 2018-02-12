@@ -25,7 +25,7 @@ assert type(value)
 >si celui-ci n'est pas identique cela leve une exception.
 
 add / sub / mul / div / mod
->addition/soustreis/multiplie/divise/modulo les deux elements les plus recent de la stack
+>addition/soustrais/multiplie/divise/modulo les deux elements les plus recent de la stack
 >[plus recent][operateur][plus recent]
 
 print
