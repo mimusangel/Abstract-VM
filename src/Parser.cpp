@@ -242,8 +242,6 @@ bool    Parser::interpret(void)
             return (false);
         }
     }
-    if (run)
-        throw LogicException("Program hasn't end!");
     return (true);
 }
 
